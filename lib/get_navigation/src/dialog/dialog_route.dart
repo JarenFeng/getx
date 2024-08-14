@@ -9,6 +9,7 @@ class GetDialogRoute<T> extends PopupRoute<T> {
     String? barrierLabel,
     Color barrierColor = const Color(0x80000000),
     Duration transitionDuration = const Duration(milliseconds: 200),
+    Duration reverseTransitionDuration = const Duration(milliseconds: 200),
     RouteTransitionsBuilder? transitionBuilder,
     RouteSettings? settings,
   })  : widget = pageBuilder,
@@ -16,6 +17,7 @@ class GetDialogRoute<T> extends PopupRoute<T> {
         _barrierLabel = barrierLabel,
         _barrierColor = barrierColor,
         _transitionDuration = transitionDuration,
+        _reverseTransitionDuration = reverseTransitionDuration,
         _transitionBuilder = transitionBuilder,
         super(settings: settings) {
     RouterReportManager.reportCurrentRoute(this);
@@ -44,6 +46,10 @@ class GetDialogRoute<T> extends PopupRoute<T> {
   @override
   Duration get transitionDuration => _transitionDuration;
   final Duration _transitionDuration;
+
+  @override
+  Duration get reverseTransitionDuration => _reverseTransitionDuration;
+  final Duration _reverseTransitionDuration;
 
   final RouteTransitionsBuilder? _transitionBuilder;
 
