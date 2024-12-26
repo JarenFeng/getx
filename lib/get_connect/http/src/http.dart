@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../src/certificates/certificates.dart';
 import '../src/exceptions/exceptions.dart';
@@ -126,7 +127,11 @@ class GetHttpClient {
       bodyBytes = utf8.encode(formData);
       headers['content-length'] = bodyBytes.length.toString();
       headers['content-type'] = contentType;
-    } else if (body is Map || body is List) {
+    } else if (body is Uint8List) {
+      bodyBytes = body;
+      headers['content-length'] = bodyBytes.length.toString();
+      headers['content-type'] = contentType ?? 'binary/octet-stream';
+    }  else if (body is Map || body is List) {
       var jsonString = json.encode(body);
 
       bodyBytes = utf8.encode(jsonString);
